@@ -1,5 +1,6 @@
 ﻿using CodeYad_Blog.CoreLayer.DTOs.Posts;
 using CodeYad_Blog.CoreLayer.Mappers;
+using CodeYad_Blog.CoreLayer.Services.FileManager;
 using CodeYad_Blog.CoreLayer.Utilities;
 using CodeYad_Blog.DataLayer.Context;
 using System;
@@ -14,17 +15,21 @@ namespace CodeYad_Blog.CoreLayer.Services.Posts
     public class PostService : IPostService
     {
         private readonly BlogContext _blogContext;
-        public PostService(BlogContext blogContext)
+        private readonly IFileManager _FileManager;
+        public PostService(BlogContext blogContext , IFileManager fileManager)
         {
             _blogContext = blogContext;
+            _FileManager = fileManager;
         }
         public OperationResult Createpost(CreatePostDTO command)
         {
+            if (command.ImageFile == null)
+                return OperationResult.Error("نام فایل خالی می باشد");
            var post = PostMapper.Map(command);
+            post.ImageName = _FileManager.SaveFile(command.ImageFile ,Directories.PostImage);
             _blogContext.Posts.Add(post);
             _blogContext.SaveChanges();
             return OperationResult.Success();
-            
         }
 
         public OperationResult EditPost(EditPostDTO command)
