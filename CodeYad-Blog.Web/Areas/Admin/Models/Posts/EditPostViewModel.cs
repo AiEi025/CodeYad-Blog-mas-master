@@ -1,19 +1,15 @@
 ﻿using Microsoft.AspNetCore.Http;
-using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
-namespace CodeYad_Blog.CoreLayer.DTOs.Posts
+namespace CodeYad_Blog.Web.Areas.Admin.Models.Posts
 {
-    public class CreatePostDTO
+    public class EditPostViewModel
     {
-        public int UserId { get; set; }
-        public int CategoryId { get; set; }
         public int? SubCategoryId { get; set; }
+        public int CategoryId { get; set; }
         public string Title { get; set; }
         public string Slug { get; set; }
+        [UIHint("CkEditor4")]
         public string Description { get; set; }
         public IFormFile ImageFile { get; set; }
     }

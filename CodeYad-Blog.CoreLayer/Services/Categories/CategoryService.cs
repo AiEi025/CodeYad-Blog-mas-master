@@ -87,6 +87,12 @@ namespace CodeYad_Blog.CoreLayer.Services.Categories
             return CategoryMapper.Map(category);
         }
 
+        public List<CategoryDto> GetChildCategories(int parentId)
+        {
+            return _blogContext.Categories.Where(p => p.ParentId == parentId).Select(p =>
+            CategoryMapper.Map(p)).ToList();
+        }
+
         public bool IsSlugExist(string slug)
         {
             return _blogContext.Categories.Any(p => p.Slug == slug.ToSlug());

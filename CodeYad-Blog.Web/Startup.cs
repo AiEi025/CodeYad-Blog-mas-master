@@ -1,4 +1,5 @@
 using CodeYad_Blog.CoreLayer.Services.Categories;
+using CodeYad_Blog.CoreLayer.Services.FileManager;
 using CodeYad_Blog.CoreLayer.Services.Posts;
 using CodeYad_Blog.CoreLayer.Services.Users;
 using CodeYad_Blog.DataLayer.Context;
@@ -34,6 +35,7 @@ namespace CodeYad_Blog.Web
             services.AddScoped<IUserService, UserService>();
             services.AddScoped<ICategoryService, CategoryService>();
             services.AddTransient<IPostService, PostService>();
+            services.AddTransient<IFileManager, FileManager>();
 
             services.AddDbContext<BlogContext>(option =>
             {

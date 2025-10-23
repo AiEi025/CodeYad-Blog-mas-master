@@ -82,5 +82,10 @@ namespace CodeYad_Blog.Web.Areas.Admin.Controllers
             }
             return RedirectToAction("Index");
         }
+        public IActionResult GetChildCategories(int parentId)
+        { 
+            var category = _categoryService.GetChildCategories(parentId);  
+        return new JsonResult(category);
+        }
     }
 }

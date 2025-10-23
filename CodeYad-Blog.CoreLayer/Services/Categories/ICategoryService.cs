@@ -13,6 +13,7 @@ namespace CodeYad_Blog.CoreLayer.Services.Categories
         OperationResult CreateCategory(CreateCategoryDto createdto);
         OperationResult EditCategory(EditCategoryDto editCategory);
         List<CategoryDto> GetAllCategory();
+        List<CategoryDto> GetChildCategories(int parentId);
         CategoryDto GetCategoryBy(int id);
         CategoryDto GetCategoryBy(string Slug);
         bool IsSlugExist(string slug);
